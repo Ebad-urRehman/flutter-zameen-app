@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:zameen_flutter/constants/app_colors.dart';
+import 'package:provider/provider.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
+import 'package:zameen_flutter/files/Maps/map_view.dart';
+import 'package:zameen_flutter/theme_widget.dart';
 
-AppColors appColors = AppColors();
 AppImages appImages = AppImages();
 
 class DetailsBanner extends StatelessWidget {
@@ -10,6 +11,7 @@ class DetailsBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeManager>(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -37,7 +39,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 16,
-                      color: appColors.darkGreen,
+                      color: themeProvider.currentTheme.darkGreen,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -46,7 +48,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
-                      color: appColors.primaryColor,
+                      color: themeProvider.currentTheme.primaryColor,
                     ),
                   )
                 ],
@@ -62,7 +64,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 16,
-                      color: appColors.darkGreen,
+                      color: themeProvider.currentTheme.darkGreen,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -71,7 +73,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
-                      color: appColors.primaryColor,
+                      color: themeProvider.currentTheme.primaryColor,
                     ),
                   )
                 ],
@@ -89,14 +91,14 @@ class DetailsBanner extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: 'Itim',
                             fontSize: 16,
-                            color: appColors.darkGreen,
+                            color: themeProvider.currentTheme.darkGreen,
                             fontWeight: FontWeight.bold)),
                     TextSpan(
                       text: "2234",
                       style: TextStyle(
                         fontFamily: 'Itim',
                         fontSize: 16,
-                        color: appColors.secondaryColor,
+                        color: themeProvider.currentTheme.secondaryColor,
                       ),
                     )
                   ])),
@@ -110,14 +112,14 @@ class DetailsBanner extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: 'Itim',
                             fontSize: 16,
-                            color: appColors.darkGreen,
+                            color: themeProvider.currentTheme.darkGreen,
                             fontWeight: FontWeight.bold)),
                     TextSpan(
                       text: "3324",
                       style: TextStyle(
                         fontFamily: 'Itim',
                         fontSize: 16,
-                        color: appColors.secondaryColor,
+                        color: themeProvider.currentTheme.secondaryColor,
                       ),
                     )
                   ])),
@@ -128,11 +130,7 @@ class DetailsBanner extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: appColors.darkGreen),
-                  borderRadius: BorderRadius.circular(8)),
-              child: Image(image: AssetImage(appImages.googleMap))),
+          const SizedBox(width: double.infinity, height: 200, child: MapView()),
           const SizedBox(
             height: 5,
           ),
@@ -170,7 +168,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 16,
-                      color: appColors.darkGreen,
+                      color: themeProvider.currentTheme.darkGreen,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -179,7 +177,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
-                      color: appColors.primaryColor,
+                      color: themeProvider.currentTheme.primaryColor,
                     ),
                   )
                 ],
@@ -195,7 +193,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 16,
-                      color: appColors.darkGreen,
+                      color: themeProvider.currentTheme.darkGreen,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -204,7 +202,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
-                      color: appColors.primaryColor,
+                      color: themeProvider.currentTheme.primaryColor,
                     ),
                   )
                 ],
@@ -220,7 +218,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 16,
-                      color: appColors.darkGreen,
+                      color: themeProvider.currentTheme.darkGreen,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -229,7 +227,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
-                      color: appColors.primaryColor,
+                      color: themeProvider.currentTheme.primaryColor,
                     ),
                   )
                 ],
@@ -249,7 +247,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 16,
-                      color: appColors.darkGreen,
+                      color: themeProvider.currentTheme.darkGreen,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -258,7 +256,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
-                      color: appColors.primaryColor,
+                      color: themeProvider.currentTheme.primaryColor,
                     ),
                   )
                 ],
@@ -274,7 +272,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 16,
-                      color: appColors.darkGreen,
+                      color: themeProvider.currentTheme.darkGreen,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -283,7 +281,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
-                      color: appColors.primaryColor,
+                      color: themeProvider.currentTheme.primaryColor,
                     ),
                   )
                 ],
@@ -299,7 +297,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 16,
-                      color: appColors.darkGreen,
+                      color: themeProvider.currentTheme.darkGreen,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -308,7 +306,7 @@ class DetailsBanner extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
-                      color: appColors.primaryColor,
+                      color: themeProvider.currentTheme.primaryColor,
                     ),
                   )
                 ],

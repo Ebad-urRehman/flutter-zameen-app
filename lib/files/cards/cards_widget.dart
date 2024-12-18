@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
 import 'package:zameen_flutter/constants/app_colors.dart';
-import 'package:zameen_flutter/files/detail%20view/details_widgets.dart';
+import 'package:zameen_flutter/theme_widget.dart';
 
 AppImages appImages = AppImages();
-AppColors appColors = AppColors();
+AppColorsDarkTheme appColors = AppColorsDarkTheme();
 
 class EstateCard extends StatelessWidget {
   const EstateCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeManager>(context);
     return Container(
         width: MediaQuery.of(context).size.width / 2,
         height: 250,
         child: Card(
-          color: appColors.darkGreen,
+          color: themeProvider.currentTheme.darkGreen,
           child: Column(
             children: [
               Text(

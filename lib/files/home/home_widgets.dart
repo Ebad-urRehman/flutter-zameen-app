@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
 import 'package:zameen_flutter/constants/app_colors.dart';
-import 'package:zameen_flutter/files/predictions/prediction_screen.dart';
 
 AppImages appImages = AppImages();
 AppColors appColors = AppColors();

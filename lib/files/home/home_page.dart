@@ -1,16 +1,18 @@
-import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:zameen_flutter/files/auth/authentication.dart';
 import 'package:zameen_flutter/files/detail%20view/details_screen.dart';
+import 'package:zameen_flutter/files/fire_store_db/file_store_service.dart';
 import 'package:zameen_flutter/files/home/home_widgets.dart';
-import 'package:zameen_flutter/files/predictions/prediction_screen.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
-import 'package:zameen_flutter/constants/app_colors.dart';
 import 'package:zameen_flutter/files/cards/cards_widget.dart';
+import 'package:zameen_flutter/theme_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 AppImages appImages = AppImages();
-AppColors appColors = AppColors();
+bool _darkThemeColors = false;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,8 +22,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final User? user = Authentication().currentUser;
+
+  Future<void> signOut() async {
+    await Authentication().signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeManager>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -32,20 +41,50 @@ class _HomePageState extends State<HomePage> {
               fontSize: 24,
               fontWeight: FontWeight.bold),
         ),
-        backgroundColor: appColors.primaryColor,
+        backgroundColor: themeProvider.currentTheme.primaryColor,
         actions: [
-          CircleAvatar(
-            radius: 20,
-            child: IconButton(
-              icon: Icon(Icons.person_2_rounded),
-              onPressed: () {
-                Navigator.pushNamed(context, '/login');
-              },
-            ),
+          // CircleAvatar(radius: 20, child: ThemeWidget()),
+          PopupMenuButton<String>(
+            itemBuilder: (BuildContext context) {
+              return [
+                const PopupMenuItem(
+                    value: 'EstateBrowser',
+                    child: Row(children: [
+                      Icon(Icons.location_searching_outlined),
+                      Text('  Browse Estates')
+                    ])),
+                PopupMenuItem(
+                    value: 'Price Predictor',
+                    onTap: () =>
+                        {Navigator.pushNamed(context, 'pricepredictor')},
+                    child: const Row(children: [
+                      Icon(Icons.auto_graph_outlined),
+                      Text('  Predict Prices')
+                    ])),
+                const PopupMenuItem(
+                    value: 'Search',
+                    child: Row(children: [
+                      Icon(Icons.search),
+                      Text('  Search Estates')
+                    ])),
+                PopupMenuItem(
+                    value: 'theme',
+                    onTap: () => {themeProvider.toggleTheme()},
+                    child: ThemeWidget()),
+                PopupMenuItem(
+                    value: 'theme', child: Text(getUserName().toString())),
+                PopupMenuItem(
+                    value: 'Logout',
+                    onTap: () => {signOut()},
+                    child: const Row(
+                        children: [Icon(Icons.logout), Text('  Logout')]))
+              ];
+            },
+            iconColor: Colors.white,
           ),
         ],
       ),
-      backgroundColor: appColors.secondaryColor,
+      backgroundColor: themeProvider.currentTheme.secondaryColor,
       body: SafeArea(
           child: Expanded(
         child: SingleChildScrollView(
@@ -62,7 +101,7 @@ class _HomePageState extends State<HomePage> {
               height: 25,
             ),
             Container(
-              color: appColors.secondaryColor,
+              color: themeProvider.currentTheme.secondaryColor,
               child: Card(
                 color: Colors.transparent,
                 elevation: 5,
@@ -191,6 +230,8 @@ Widget buildIndicator() => AnimatedSmoothIndicator(
     );
 
 Widget buildImage(context, List urlImage, int index) {
+  final themeProvider = Provider.of<ThemeManager>(context);
+
   return Stack(
     children: [
       Positioned.fill(
@@ -206,7 +247,7 @@ Widget buildImage(context, List urlImage, int index) {
             urlImage[0],
             fit: BoxFit.contain,
             width: MediaQuery.of(context).size.width * 2,
-            color: appColors.secondaryColor.withOpacity(0.3),
+            color: themeProvider.currentTheme.secondaryColor.withOpacity(0.3),
             colorBlendMode: BlendMode.darken,
           ),
         ),

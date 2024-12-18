@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:zameen_flutter/constants/app_colors.dart';
+import 'package:provider/provider.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
-import 'package:zameen_flutter/files/login/widgets.dart';
+import 'package:zameen_flutter/files/login/login_widgets.dart';
+import 'package:zameen_flutter/theme_widget.dart';
 
 AppImages appImages = AppImages();
-AppColors appColors = AppColors();
 var inputDecoration = InputWidgetDecoration();
 
 class SplashScreen extends StatefulWidget {
@@ -23,15 +23,18 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Timer(const Duration(seconds: 2), () {
       if (mounted) {
-        Navigator.pushNamed(context, '/login');
+        Navigator.pushNamed(context, '/redirect');
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeManager>(context);
+
     return MaterialApp(
-        theme: ThemeData(scaffoldBackgroundColor: appColors.primaryColor),
+        theme: ThemeData(
+            scaffoldBackgroundColor: themeProvider.currentTheme.primaryColor),
         title: 'Welcome',
         home: Scaffold(
             body: Stack(
@@ -55,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     height: 140,
                   ),
                   CircleAvatar(
-                    backgroundColor: appColors.white,
+                    backgroundColor: themeProvider.currentTheme.white,
                     radius: 75,
                     backgroundImage: const AssetImage('room_image_2.png'),
                   ),
@@ -66,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     'Welcome to the App!',
                     style: TextStyle(
                       fontFamily: 'Itim',
-                      color: appColors.white,
+                      color: themeProvider.currentTheme.white,
                       fontSize: 50,
                       fontWeight: FontWeight.bold,
                     ),
