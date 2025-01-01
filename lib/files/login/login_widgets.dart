@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zameen_flutter/constants/app_colors.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
-import 'package:zameen_flutter/files/detail%20view/details_widgets.dart';
 import 'package:zameen_flutter/files/home/home_page.dart';
 import 'package:zameen_flutter/files/login/sign_up.dart';
 import 'package:zameen_flutter/files/login/splash_screen.dart';
@@ -67,7 +66,7 @@ class ProfilePicture extends StatelessWidget {
     return CircleAvatar(
       backgroundColor: themeProvider.currentTheme.white,
       radius: 75,
-      backgroundImage: const AssetImage('room_image_2.png'),
+      backgroundImage: AssetImage(appImages.roomImage),
     );
   }
 }
@@ -109,6 +108,7 @@ class PasswordInput extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 1.3,
       child: TextFormField(
         controller: controller,
+        obscureText: true,
         decoration: inputDecoration.decoration(
             labelText: 'Password',
             fontFamily: 'Itim',
@@ -226,7 +226,7 @@ class _ErrorMessageState extends State<ErrorMessage> {
       child: Text(
         widget.errorMessage.toString(),
         style: const TextStyle(
-            color: Colors.red, fontFamily: 'Itim', fontSize: 30),
+            color: Colors.red, fontFamily: 'Itim', fontSize: 25),
       ),
     );
   }

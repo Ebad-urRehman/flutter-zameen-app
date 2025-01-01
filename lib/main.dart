@@ -2,12 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zameen_flutter/files/auth/redirect.dart';
+import 'package:zameen_flutter/files/browse_screen/browse_estates.dart';
 import 'package:zameen_flutter/files/detail%20view/details_screen.dart';
 import 'package:zameen_flutter/files/login/login_screen.dart';
 import 'package:zameen_flutter/files/login/sign_up.dart';
 import 'package:zameen_flutter/files/login/splash_screen.dart';
 import 'package:zameen_flutter/files/predictions/prediction_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:zameen_flutter/files/search/search.dart';
 import 'package:zameen_flutter/theme_widget.dart';
 
 void main() async {
@@ -48,9 +50,9 @@ class MyApp extends StatelessWidget {
         '/redirect': (context) => const Redirect(),
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUp(),
-        '/details': (context) => const DetailsScreen(),
         '/pricepredictor': (context) => const PricePredictorPage(),
-        '/browseestates': (context) => const PricePredictorPage(),
+        '/browseestates': (context) => const BrowseEstates(),
+        '/search': (context) => SearchFilterExample(),
       },
       // home: Column(children: [Expanded(child: HomePage())]),
     );

@@ -33,6 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final themeProvider = Provider.of<ThemeManager>(context);
 
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
             scaffoldBackgroundColor: themeProvider.currentTheme.primaryColor),
         title: 'Welcome',
@@ -60,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   CircleAvatar(
                     backgroundColor: themeProvider.currentTheme.white,
                     radius: 75,
-                    backgroundImage: const AssetImage('room_image_2.png'),
+                    backgroundImage: AssetImage((appImages.roomImage)),
                   ),
                   const SizedBox(
                     height: 30,

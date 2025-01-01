@@ -12,79 +12,17 @@ class PricePredictorPage extends StatelessWidget {
     final themeProvider = Provider.of<ThemeManager>(context);
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: themeProvider.currentTheme.primaryColor,
-          title: const Text('Predict house prices',
-              style: TextStyle(
-                  color: Colors.white, fontFamily: 'Itim', fontSize: 24)),
-        ),
-        backgroundColor: themeProvider.currentTheme.secondaryColor,
-        body: Column(
-          children: [
-            Expanded(
-              child: Row(children: [
-                Expanded(
-                  child: SelectBox(
-                    optionList: propertyTypeItems,
-                  ),
-                ),
-                Expanded(
-                  child: SelectBox(
-                    optionList: propertyTypeItems,
-                  ),
-                ),
-              ]),
-            ),
-            Expanded(
-              child: Row(children: [
-                Expanded(
-                  child: SelectBox(
-                    optionList: propertyTypeItems,
-                  ),
-                ),
-                Expanded(
-                  child: SelectBox(
-                    optionList: propertyTypeItems,
-                  ),
-                ),
-              ]),
-            ),
-            Expanded(
-              child: Row(children: [
-                Expanded(
-                  child: SelectBox(
-                    optionList: propertyTypeItems,
-                  ),
-                ),
-                Expanded(
-                  child: SelectBox(
-                    optionList: propertyTypeItems,
-                  ),
-                ),
-              ]),
-            ),
-          ],
-        ),
-      ),
+          appBar: AppBar(
+            backgroundColor: themeProvider.currentTheme.primaryColor,
+            title: const Text('Predict house prices',
+                style: TextStyle(
+                    color: Colors.white, fontFamily: 'Itim', fontSize: 24)),
+          ),
+          backgroundColor: themeProvider.currentTheme.secondaryColor,
+          body: const PredictionUi()),
     );
   }
 }
-
-List<String> propertyTypeItems = [
-  'Flats',
-  'House',
-  'Farm House',
-  'Pent House',
-  'Room',
-  'Upper Portion',
-  'Lower Portion'
-];
-
-List<String> city = [
-  'Islamabad',
-  'Lahore',
-  'Karachi',
-  'Multan',
-];

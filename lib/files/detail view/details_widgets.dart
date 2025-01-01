@@ -1,13 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
+import 'package:zameen_flutter/files/Helpers/helper.dart';
 import 'package:zameen_flutter/files/Maps/map_view.dart';
+import 'package:zameen_flutter/files/cards/list_of_cards.dart';
 import 'package:zameen_flutter/theme_widget.dart';
 
 AppImages appImages = AppImages();
 
 class DetailsBanner extends StatelessWidget {
-  const DetailsBanner({super.key});
+  String propertyName;
+  String purpose;
+  String area;
+  String province;
+  String city;
+  String location;
+  double widthRatio;
+  double height;
+  String latitude;
+  String longitude;
+  String pageUrl;
+  String bedrooms;
+  String baths;
+  String agency;
+  String agent;
+  String price;
+
+  DetailsBanner(
+      {super.key,
+      required this.propertyName,
+      required this.purpose,
+      required this.area,
+      required this.province,
+      required this.city,
+      required this.location,
+      required this.widthRatio,
+      required this.height,
+      required this.latitude,
+      required this.longitude,
+      required this.pageUrl,
+      required this.bedrooms,
+      required this.baths,
+      required this.agency,
+      required this.agent,
+      required this.price});
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +53,26 @@ class DetailsBanner extends StatelessWidget {
         children: [
           Container(
             width: MediaQuery.sizeOf(context).width,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('house2.png'), fit: BoxFit.cover)),
-            child: const Card(
+                    image: AssetImage(appImages.houseImage),
+                    fit: BoxFit.cover)),
+            child: Card(
               color: Colors.transparent,
               elevation: 10,
-              child: SizedBox(height: 200, child: Text('House in Location')),
+              child: SizedBox(
+                  height: 200,
+                  child: Center(
+                    child: Text(
+                      '$propertyName in $location',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: 'Itim',
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
+                          color: themeProvider.currentTheme.white),
+                    ),
+                  )),
             ),
           ),
           const SizedBox(
@@ -44,7 +93,7 @@ class DetailsBanner extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Punjab',
+                    province,
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
@@ -69,7 +118,7 @@ class DetailsBanner extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Lahore',
+                    city,
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
@@ -94,11 +143,11 @@ class DetailsBanner extends StatelessWidget {
                             color: themeProvider.currentTheme.darkGreen,
                             fontWeight: FontWeight.bold)),
                     TextSpan(
-                      text: "2234",
+                      text: latitude,
                       style: TextStyle(
                         fontFamily: 'Itim',
                         fontSize: 16,
-                        color: themeProvider.currentTheme.secondaryColor,
+                        color: themeProvider.currentTheme.primaryColor,
                       ),
                     )
                   ])),
@@ -115,11 +164,11 @@ class DetailsBanner extends StatelessWidget {
                             color: themeProvider.currentTheme.darkGreen,
                             fontWeight: FontWeight.bold)),
                     TextSpan(
-                      text: "3324",
+                      text: longitude,
                       style: TextStyle(
                         fontFamily: 'Itim',
                         fontSize: 16,
-                        color: themeProvider.currentTheme.secondaryColor,
+                        color: themeProvider.currentTheme.primaryColor,
                       ),
                     )
                   ])),
@@ -130,16 +179,27 @@ class DetailsBanner extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          const SizedBox(width: double.infinity, height: 200, child: MapView()),
+          Container(
+              width: double.infinity,
+              height: 200,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: themeProvider.currentTheme.white, width: 1),
+                  borderRadius: BorderRadius.circular(8)),
+              child: Card(
+                  child: MapView(
+                latitude: latitude,
+                longitude: longitude,
+              ))),
           const SizedBox(
             height: 5,
           ),
           Container(
-            width: MediaQuery.of(context).size.width / 1.2,
+            width: MediaQuery.of(context).size.width / 1,
             child: RichText(
-                text: const TextSpan(children: [
-              TextSpan(
-                text: "Location : ",
+                text: TextSpan(children: [
+              const TextSpan(
+                text: " ➡️ Location : ",
                 style: TextStyle(
                   fontFamily: 'Itim',
                   fontSize: 16,
@@ -149,8 +209,8 @@ class DetailsBanner extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: "Located near sector A1",
-                style: TextStyle(
+                text: location,
+                style: const TextStyle(
                     fontFamily: 'Itim', fontSize: 16, color: Colors.black),
               )
             ])),
@@ -173,7 +233,7 @@ class DetailsBanner extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Unknown',
+                    agency,
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
@@ -198,7 +258,7 @@ class DetailsBanner extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Unknown',
+                    agent,
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
@@ -222,14 +282,7 @@ class DetailsBanner extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    'Click here',
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 20,
-                      color: themeProvider.currentTheme.primaryColor,
-                    ),
-                  )
+                  TextUrl(url: pageUrl, text: 'Click here'),
                 ],
               ),
             ],
@@ -252,7 +305,7 @@ class DetailsBanner extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '40 Marla',
+                    area,
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
@@ -277,7 +330,7 @@ class DetailsBanner extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '4',
+                    bedrooms.toString(),
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
@@ -302,17 +355,27 @@ class DetailsBanner extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '2',
+                    baths.toString(),
                     style: TextStyle(
                       fontFamily: 'Itim',
                       fontSize: 20,
                       color: themeProvider.currentTheme.primaryColor,
                     ),
-                  )
+                  ),
                 ],
               ),
             ],
           ),
+          ListOfCards(
+            headerText: '  ➡️  Nearest to your location',
+            widthRatio: 2.5,
+            height: 225,
+          ),
+          ListOfCards(
+            headerText: '  ➡️  Recommended for you',
+            widthRatio: 2.5,
+            height: 225,
+          )
         ],
       ),
     );

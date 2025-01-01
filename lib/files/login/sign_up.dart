@@ -39,6 +39,7 @@ class _SignUpState extends State<SignUp> {
     }
 
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
             scaffoldBackgroundColor:
                 themeProvider.currentTheme.signUpBackground),

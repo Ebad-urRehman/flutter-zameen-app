@@ -2,12 +2,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:zameen_flutter/files/admin/add_data.dart';
 import 'package:zameen_flutter/files/auth/authentication.dart';
+import 'package:zameen_flutter/files/cards/list_of_cards.dart';
 import 'package:zameen_flutter/files/detail%20view/details_screen.dart';
 import 'package:zameen_flutter/files/fire_store_db/file_store_service.dart';
 import 'package:zameen_flutter/files/home/home_widgets.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
-import 'package:zameen_flutter/files/cards/cards_widget.dart';
+import 'package:zameen_flutter/files/search/search.dart';
+import 'package:zameen_flutter/files/search/simple_query_result.dart';
 import 'package:zameen_flutter/theme_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -61,9 +64,15 @@ class _HomePageState extends State<HomePage> {
                       Icon(Icons.auto_graph_outlined),
                       Text('  Predict Prices')
                     ])),
-                const PopupMenuItem(
+                PopupMenuItem(
                     value: 'Search',
-                    child: Row(children: [
+                    onTap: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchFilterExample()))
+                        },
+                    child: const Row(children: [
                       Icon(Icons.search),
                       Text('  Search Estates')
                     ])),
@@ -73,6 +82,16 @@ class _HomePageState extends State<HomePage> {
                     child: ThemeWidget()),
                 PopupMenuItem(
                     value: 'theme', child: Text(getUserName().toString())),
+                PopupMenuItem(
+                    value: 'Add data',
+                    onTap: () => {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AddData()))
+                        },
+                    child: const Row(
+                        children: [Icon(Icons.add), Text('  Add Data')])),
                 PopupMenuItem(
                     value: 'Logout',
                     onTap: () => {signOut()},
@@ -109,7 +128,23 @@ class _HomePageState extends State<HomePage> {
                   itemCount: estateImages.length,
                   itemBuilder: (context, index, realIndex) {
                     final url_image = estateImages[index];
-                    return buildImage(context, url_image, index);
+                    final property_name =
+                        '${estateImages[index][1]}' == 'Pent House'
+                            ? 'Penthouse'
+                            : '${estateImages[index][1]}';
+                    return GestureDetector(
+                        onTap: () {
+                          Map queryParams = {
+                            'column': 'property_type',
+                            'values': [property_name]
+                          };
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SimpleQueryResultScreen(
+                                      queryParams: queryParams)));
+                        },
+                        child: buildImage(context, url_image, index));
                   },
                   options: CarouselOptions(
                       height: 250, autoPlay: true, enlargeCenterPage: true),
@@ -136,18 +171,31 @@ class _HomePageState extends State<HomePage> {
                         ),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(10))),
-                    child: Card(
-                      elevation: 5,
-                      color: Colors.transparent,
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width / 2.25,
-                        height: 100,
-                        child: const Text('For rent',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontFamily: 'Itim',
-                                fontWeight: FontWeight.bold)),
+                    child: GestureDetector(
+                      onTap: () {
+                        Map queryParams = {
+                          'column': 'purpose',
+                          'values': ['For Rent']
+                        };
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SimpleQueryResultScreen(
+                                    queryParams: queryParams)));
+                      },
+                      child: Card(
+                        elevation: 5,
+                        color: Colors.transparent,
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width / 2.25,
+                          height: 100,
+                          child: const Text('For rent',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25,
+                                  fontFamily: 'Itim',
+                                  fontWeight: FontWeight.bold)),
+                        ),
                       ),
                     ),
                   ),
@@ -162,10 +210,15 @@ class _HomePageState extends State<HomePage> {
                             const BorderRadius.all(Radius.circular(10))),
                     child: GestureDetector(
                       onTap: () {
+                        Map queryParams = {
+                          'column': 'purpose',
+                          'values': ['For Sale']
+                        };
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const DetailsScreen()));
+                                builder: (context) => SimpleQueryResultScreen(
+                                    queryParams: queryParams)));
                       },
                       child: Card(
                         elevation: 5,
@@ -200,18 +253,8 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 25,
             ),
-            const SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Expanded(
-                child: Row(
-                  children: [
-                    EstateCard(),
-                    EstateCard(),
-                    EstateCard(),
-                  ],
-                ),
-              ),
-            ),
+            ListOfCards(
+                headerText: '  ➡️  Favorites', widthRatio: 2.5, height: 225),
             const SizedBox(
               height: 25,
             ),
@@ -267,9 +310,9 @@ Widget buildImage(context, List urlImage, int index) {
 
 int activeIndex = 0;
 List<List> estateImages = [
-  [appImages.houseImage2, 'House'],
-  [appImages.farmhouseImage2, 'Farm House'],
-  [appImages.roomImage2, 'Room'],
-  [appImages.flatImage2, 'Flat'],
-  [appImages.penthouseImage2, 'Pent House'],
+  [appImages.houseImage, 'House'],
+  [appImages.farmhouseImage, 'Farm House'],
+  [appImages.roomImage, 'Room'],
+  [appImages.flatImage, 'Flat'],
+  [appImages.penthouseImage, 'Pent House'],
 ];

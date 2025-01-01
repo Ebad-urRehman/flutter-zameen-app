@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
 import 'package:zameen_flutter/files/auth/authentication.dart';
-import 'package:zameen_flutter/files/home/home_page.dart';
 import 'package:zameen_flutter/files/login/login_widgets.dart';
 import 'package:zameen_flutter/theme_widget.dart';
 
@@ -20,20 +19,20 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String? errorMessage = '';
+  final TextEditingController controllerEmail = TextEditingController();
+  final TextEditingController controllerPassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeManager>(context);
-
-    final TextEditingController controllerEmail = TextEditingController();
-    final TextEditingController controllerPassword = TextEditingController();
-    String? errorMessage = '';
 
     Future<void> signInWithEmailAndPassword() async {
       try {
         await Authentication().signInWithEmailAndPassword(
             email: controllerEmail.text, password: controllerPassword.text);
         Navigator.pushNamed(context, '/splashscreen');
-        print('SUcessful');
+        print('Sucessful');
       } on FirebaseAuthException catch (e) {
         setState(() {
           errorMessage = e.message;
@@ -43,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
             scaffoldBackgroundColor: themeProvider.currentTheme.primaryColor),
         title: 'Login',
@@ -78,7 +78,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 40,
                       child: ElevatedButton(
                           onPressed: () {
-                            signInWithEmailAndPassword();
+                            if (controllerEmail.text != '' &&
+                                controllerPassword.text != '') {
+                              signInWithEmailAndPassword();
+                            } else {
+                              setState(() {
+                                errorMessage =
+                                    "Can't login without email or password";
+                              });
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:

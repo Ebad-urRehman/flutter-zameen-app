@@ -1,0 +1,86 @@
+[1mdiff --git a/assets/farm_house_image.png b/assets/farm_house_image.png[m
+[1mdeleted file mode 100644[m
+[1mindex 753e639..0000000[m
+Binary files a/assets/farm_house_image.png and /dev/null differ
+[1mdiff --git a/assets/farmhouse_2.png b/assets/farmhouse_2.png[m
+[1mdeleted file mode 100644[m
+[1mindex 44b4270..0000000[m
+Binary files a/assets/farmhouse_2.png and /dev/null differ
+[1mdiff --git a/assets/flat_image.png b/assets/flat_image.png[m
+[1mdeleted file mode 100644[m
+[1mindex 1a3fc63..0000000[m
+Binary files a/assets/flat_image.png and /dev/null differ
+[1mdiff --git a/assets/flat_image_2.png b/assets/flat_image_2.png[m
+[1mdeleted file mode 100644[m
+[1mindex dc4dbff..0000000[m
+Binary files a/assets/flat_image_2.png and /dev/null differ
+[1mdiff --git a/assets/house2.png b/assets/house2.png[m
+[1mdeleted file mode 100644[m
+[1mindex ffd6cfa..0000000[m
+Binary files a/assets/house2.png and /dev/null differ
+[1mdiff --git a/assets/house_image.png b/assets/house_image.png[m
+[1mdeleted file mode 100644[m
+[1mindex fef9289..0000000[m
+Binary files a/assets/house_image.png and /dev/null differ
+[1mdiff --git a/assets/image.png b/assets/image.png[m
+[1mdeleted file mode 100644[m
+[1mindex a100936..0000000[m
+Binary files a/assets/image.png and /dev/null differ
+[1mdiff --git a/assets/pent_house_image.png b/assets/pent_house_image.png[m
+[1mdeleted file mode 100644[m
+[1mindex d07d22d..0000000[m
+Binary files a/assets/pent_house_image.png and /dev/null differ
+[1mdiff --git a/assets/penthouse_image_2.png b/assets/penthouse_image_2.png[m
+[1mdeleted file mode 100644[m
+[1mindex 5793f1e..0000000[m
+Binary files a/assets/penthouse_image_2.png and /dev/null differ
+[1mdiff --git a/assets/predict_prices.png b/assets/predict_prices.png[m
+[1mdeleted file mode 100644[m
+[1mindex 2d42b7a..0000000[m
+Binary files a/assets/predict_prices.png and /dev/null differ
+[1mdiff --git a/assets/room_image.png b/assets/room_image.png[m
+[1mdeleted file mode 100644[m
+[1mindex 1e0627f..0000000[m
+Binary files a/assets/room_image.png and /dev/null differ
+[1mdiff --git a/assets/room_image_2.png b/assets/room_image_2.png[m
+[1mdeleted file mode 100644[m
+[1mindex 7260c68..0000000[m
+Binary files a/assets/room_image_2.png and /dev/null differ
+[1mdiff --git a/lib/constants/app_images.dart b/lib/constants/app_images.dart[m
+[1mindex 40f9d92..b881981 100644[m
+[1m--- a/lib/constants/app_images.dart[m
+[1m+++ b/lib/constants/app_images.dart[m
+[36m@@ -1,17 +1,12 @@[m
+ class AppImages {[m
+[31m-  String houseImage = 'house_image.png';[m
+[31m-  String houseImage2 = 'house2.png';[m
+[31m-  String flatImage = 'flat_image.png';[m
+[31m-  String flatImage2 = 'flat_image_2.png';[m
+[31m-  String penthouseImage = 'pent_house_image.png';[m
+[31m-  String penthouseImage2 = 'penthouse_image_2.png';[m
+[31m-  String roomImage = 'room_image.png';[m
+[31m-  String roomImage2 = 'room_image_2.png';[m
+[32m+[m[32m  String houseImage = 'house.png';[m
+[32m+[m[32m  String flatImage = 'flat.png';[m
+[32m+[m[32m  String penthouseImage = 'penthouse.png';[m
+[32m+[m[32m  String roomImage = 'room_2.png';[m
+   String rentImage = 'for_rent.png';[m
+   String saleImage = 'for_sale.png';[m
+   String predictpriceImage = 'predict_price.png';[m
+[31m-  String farmhouseImage = 'farm_house_image.png';[m
+[31m-  String farmhouseImage2 = 'farmhouse_2.png';[m
+[32m+[m[32m  String farmhouseImage = 'farm_house.png';[m
+   String topLoginImage = 'top_left_image.png';[m
+   String googleMap = 'google_app_image.png';[m
+   String estateImage = 'estate_image.png';[m
+[1mdiff --git a/lib/files/Maps/map_view.dart b/lib/files/Maps/map_view.dart[m
+[1mindex 3ec28c8..d9c4cee 100644[m
+[1m--- a/lib/files/Maps/map_view.dart[m
+[1m+++ b/lib/files/Maps/map_view.dart[m
+[36m@@ -3,25 +3,29 @@[m [mimport 'package:flutter_map/flutter_map.dart';[m
+ import 'package:latlong2/latlong.dart';[m
+ [m
+ class MapView extends StatelessWidget {[m
+[31m-  const MapView({super.key});[m
+[32m+[m[32m  String latitude;[m
+[32m+[m[32m  S
