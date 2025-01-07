@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:zameen_flutter/constants/custom_widgets.dart';
 import 'package:zameen_flutter/files/detail%20view/details_widgets.dart';
 import 'package:zameen_flutter/theme_widget.dart';
 
@@ -50,11 +51,7 @@ class DetailsScreen extends StatelessWidget {
         home: Scaffold(
           appBar: AppBar(
             backgroundColor: themeProvider.currentTheme.primaryColor,
-            title: Text('Property Details',
-                style: TextStyle(
-                    fontFamily: 'Itim',
-                    fontWeight: FontWeight.bold,
-                    color: themeProvider.currentTheme.white)),
+            title: AppBarText(text: 'Property Details'),
           ),
           backgroundColor: themeProvider.currentTheme.secondaryColor,
           body: DetailsBanner(

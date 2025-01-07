@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<Map<String, dynamic>> fetchData() async {
-  final url = Uri.parse('http://127.0.0.1:5000/api/get_unique');
+  final url = Uri.parse(
+      'https://zameen-flutter-backend-production.up.railway.app/api/get_unique');
   final response = await http.get(url);
 
   if (response.statusCode == 200) {
@@ -14,7 +15,8 @@ Future<Map<String, dynamic>> fetchData() async {
 }
 
 Future<Map> predictPrices(dataMap) async {
-  final url = Uri.parse('http://127.0.0.1:5000/api/predict_prices');
+  final url = Uri.parse(
+      'https://zameen-flutter-backend-production.up.railway.app/api/predict_prices');
 
   final response = await http.post(url,
       headers: {"Content-Type": "application/json"},
@@ -29,7 +31,8 @@ Future<Map> predictPrices(dataMap) async {
 }
 
 Future<Map<String, dynamic>> fetchRecommendations() async {
-  final url = Uri.parse('http://127.0.0.1:5000/api/fetch_recommendations');
+  final url = Uri.parse(
+      'https://zameen-flutter-backend-production.up.railway.app/api/fetch_recommendations');
 
   final response = await http.get(url);
 
@@ -43,7 +46,8 @@ Future<Map<String, dynamic>> fetchRecommendations() async {
 
 Future<Map<String, dynamic>> applyQuery(
     {required dataMap, required pageNo}) async {
-  final url = Uri.parse('http://127.0.0.1:5000/api/query');
+  final url = Uri.parse(
+      'https://zameen-flutter-backend-production.up.railway.app/api/query');
 
   Map updatedDataMap = {'data': dataMap, 'page_no': pageNo};
   final response = await http.post(url,

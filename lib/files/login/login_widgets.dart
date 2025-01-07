@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,11 +27,11 @@ class InputWidgetDecoration {
         labelStyle: TextStyle(fontFamily: fontFamily, color: color),
         prefixIcon: icon,
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius)),
+            borderRadius: BorderRadius.circular(borderRadius as double)),
         filled: true,
         fillColor: fillColor,
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
+          borderRadius: BorderRadius.circular(borderRadius as double),
           borderSide: BorderSide(
             color:
                 focusedColor, // Outline color when the field is focused (active)
@@ -87,7 +89,7 @@ class EmailInput extends StatelessWidget {
             labelText: 'Email',
             fontFamily: 'Itim',
             color: Colors.black,
-            borderRadius: 8,
+            borderRadius: 8.0,
             icon: const Icon(Icons.mail),
             fillColor: themeProvider.currentTheme.secondaryColor,
             focusedColor: Colors.black),
@@ -113,7 +115,7 @@ class PasswordInput extends StatelessWidget {
             labelText: 'Password',
             fontFamily: 'Itim',
             color: Colors.black,
-            borderRadius: 8,
+            borderRadius: 8.0,
             icon: const Icon(Icons.lock),
             fillColor: themeProvider.currentTheme.secondaryColor,
             focusedColor: Colors.black),
@@ -134,7 +136,7 @@ class RememberMeButton extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              'Remember Me',
+              'Remember Me ✔️',
               style: TextStyle(
                 fontFamily: 'Itim',
                 fontSize: 16,

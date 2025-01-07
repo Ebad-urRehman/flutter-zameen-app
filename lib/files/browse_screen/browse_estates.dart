@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:zameen_flutter/constants/custom_widgets.dart';
 import 'package:zameen_flutter/files/cards/list_of_cards.dart';
 import 'package:zameen_flutter/theme_widget.dart';
 
@@ -20,11 +21,7 @@ class _BrowseEstatesState extends State<BrowseEstates> {
         backgroundColor: themeProvider.currentTheme.secondaryColor,
         appBar: AppBar(
           backgroundColor: themeProvider.currentTheme.primaryColor,
-          title: Text(
-            'Browse Estates',
-            style: TextStyle(
-                fontFamily: 'Itim', color: themeProvider.currentTheme.white),
-          ),
+          title: AppBarText(text: 'Browse Estates'),
         ),
         body: SingleChildScrollView(
           child: Column(

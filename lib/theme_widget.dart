@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zameen_flutter/constants/app_colors.dart';
+import 'package:zameen_flutter/files/store%20data/manage_share_preferences.dart';
 
 class ThemeWidget extends StatelessWidget {
   @override
@@ -17,12 +18,14 @@ class ThemeWidget extends StatelessWidget {
 }
 
 class ThemeManager extends ChangeNotifier {
-  bool _isDarkTheme = false;
+  bool _isDarkTheme = getStringValue(key: 'theme') == 'true' ? true : false;
 
   bool get isDarkTheme => _isDarkTheme;
 
   void toggleTheme() {
     _isDarkTheme = !_isDarkTheme;
+    String strValue = _isDarkTheme == false ? 'false' : 'true';
+    addStringValue(key: 'theme', value: strValue);
     notifyListeners();
   }
 

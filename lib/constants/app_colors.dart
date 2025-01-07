@@ -7,6 +7,7 @@ class AppColors {
   Color white = const Color(0xffD4C5E2);
   Color grey = const Color(0xff95A3B3);
   Color signUpBackground = const Color(0xffD4C5E2);
+  Color pureWhite = Colors.white;
 }
 
 class AppColorsDarkTheme {
@@ -16,4 +17,5 @@ class AppColorsDarkTheme {
   Color white = const Color(0xffD4C5E2);
   Color grey = const Color(0xff95A3B3);
   Color signUpBackground = const Color(0xff95A3B3);
+  Color pureWhite = Colors.white;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
+import 'package:zameen_flutter/constants/custom_widgets.dart';
 import 'package:zameen_flutter/files/Helpers/helper.dart';
 import 'package:zameen_flutter/files/Maps/map_view.dart';
 import 'package:zameen_flutter/files/cards/list_of_cards.dart';
@@ -49,334 +50,204 @@ class DetailsBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeManager>(context);
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            width: MediaQuery.sizeOf(context).width,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(appImages.houseImage),
-                    fit: BoxFit.cover)),
-            child: Card(
-              color: Colors.transparent,
-              elevation: 10,
-              child: SizedBox(
-                  height: 200,
-                  child: Center(
-                    child: Text(
-                      '$propertyName in $location',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: 'Itim',
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold,
-                          color: themeProvider.currentTheme.white),
-                    ),
-                  )),
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    'Province',
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 16,
-                      color: themeProvider.currentTheme.darkGreen,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    province,
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 20,
-                      color: themeProvider.currentTheme.primaryColor,
-                    ),
-                  )
-                ],
-              ),
-              const VerticalDivider(
-                color: Colors.black,
-                thickness: 2,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'City',
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 16,
-                      color: themeProvider.currentTheme.darkGreen,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    city,
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 20,
-                      color: themeProvider.currentTheme.primaryColor,
-                    ),
-                  )
-                ],
-              ),
-              const VerticalDivider(
-                color: Colors.black,
-                thickness: 2,
-              ),
-              Column(
-                children: [
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                        text: "Latitude : ",
-                        style: TextStyle(
-                            fontFamily: 'Itim',
-                            fontSize: 16,
-                            color: themeProvider.currentTheme.darkGreen,
-                            fontWeight: FontWeight.bold)),
-                    TextSpan(
-                      text: latitude,
-                      style: TextStyle(
-                        fontFamily: 'Itim',
-                        fontSize: 16,
-                        color: themeProvider.currentTheme.primaryColor,
-                      ),
-                    )
-                  ])),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                        text: "Longitude : ",
-                        style: TextStyle(
-                            fontFamily: 'Itim',
-                            fontSize: 16,
-                            color: themeProvider.currentTheme.darkGreen,
-                            fontWeight: FontWeight.bold)),
-                    TextSpan(
-                      text: longitude,
-                      style: TextStyle(
-                        fontFamily: 'Itim',
-                        fontSize: 16,
-                        color: themeProvider.currentTheme.primaryColor,
-                      ),
-                    )
-                  ])),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Container(
-              width: double.infinity,
-              height: 200,
+      child: Expanded(
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.sizeOf(context).width,
               decoration: BoxDecoration(
-                  border: Border.all(
-                      color: themeProvider.currentTheme.white, width: 1),
-                  borderRadius: BorderRadius.circular(8)),
+                  image: DecorationImage(
+                      image: AssetImage(
+                          'assets/${propertyName.replaceAll(' ', '_').toLowerCase()}.png'),
+                      fit: BoxFit.cover)),
               child: Card(
-                  child: MapView(
-                latitude: latitude,
-                longitude: longitude,
-              ))),
-          const SizedBox(
-            height: 5,
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width / 1,
-            child: RichText(
-                text: TextSpan(children: [
-              const TextSpan(
-                text: " ➡️ Location : ",
-                style: TextStyle(
-                  fontFamily: 'Itim',
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline,
+                color: Colors.transparent,
+                elevation: 10,
+                child: SizedBox(
+                    height: 200,
+                    child: Center(
+                      child: Text(
+                        '$propertyName in $location',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'Itim',
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            color: themeProvider.currentTheme.white),
+                      ),
+                    )),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      DetailHeader(text: 'Province'),
+                      DetailText(text: province)
+                    ],
+                  ),
                 ),
-              ),
-              TextSpan(
-                text: location,
-                style: const TextStyle(
-                    fontFamily: 'Itim', fontSize: 16, color: Colors.black),
-              )
-            ])),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    'Agency',
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 16,
-                      color: themeProvider.currentTheme.darkGreen,
-                      fontWeight: FontWeight.bold,
-                    ),
+                const VerticalDivider(
+                  color: Colors.black,
+                  thickness: 2,
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      DetailHeader(text: 'City'),
+                      DetailText(text: city)
+                    ],
                   ),
-                  Text(
-                    agency,
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 20,
-                      color: themeProvider.currentTheme.primaryColor,
-                    ),
-                  )
-                ],
-              ),
-              const VerticalDivider(
-                color: Colors.black,
-                thickness: 2,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'Agent',
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 16,
-                      color: themeProvider.currentTheme.darkGreen,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                const VerticalDivider(
+                  color: Colors.black,
+                  thickness: 2,
+                ),
+                Expanded(
+                    child: LatLongitudeText(
+                  latitude: latitude,
+                  longitude: longitude,
+                )),
+              ],
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Container(
+                width: double.infinity,
+                height: 200,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        color: themeProvider.currentTheme.white, width: 1),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Card(
+                    child: MapView(
+                        latitude: latitude,
+                        longitude: longitude,
+                        propertyName: propertyName,
+                        purpose: purpose,
+                        city: city))),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width / 1,
+              child: RichText(
+                  text: TextSpan(children: [
+                const TextSpan(
+                  text: " ➡️ Location : ",
+                  style: TextStyle(
+                    fontFamily: 'Itim',
+                    fontSize: 16,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
                   ),
-                  Text(
-                    agent,
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 20,
-                      color: themeProvider.currentTheme.primaryColor,
-                    ),
-                  )
-                ],
-              ),
-              const VerticalDivider(
-                color: Colors.black,
-                thickness: 2,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'URL',
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 16,
-                      color: themeProvider.currentTheme.darkGreen,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                TextSpan(
+                  text: location,
+                  style: const TextStyle(
+                      fontFamily: 'Itim', fontSize: 16, color: Colors.black),
+                )
+              ])),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      DetailHeader(text: 'Agency'),
+                      DetailText(text: agency)
+                    ],
                   ),
-                  TextUrl(url: pageUrl, text: 'Click here'),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    'Area',
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 16,
-                      color: themeProvider.currentTheme.darkGreen,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                const VerticalDivider(
+                  color: Colors.black,
+                  thickness: 2,
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      DetailHeader(text: 'Agency'),
+                      DetailText(text: agent)
+                    ],
                   ),
-                  Text(
-                    area,
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 20,
-                      color: themeProvider.currentTheme.primaryColor,
-                    ),
-                  )
-                ],
-              ),
-              const VerticalDivider(
-                color: Colors.black,
-                thickness: 2,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'Bedrooms',
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 16,
-                      color: themeProvider.currentTheme.darkGreen,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                const VerticalDivider(
+                  color: Colors.black,
+                  thickness: 2,
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      DetailHeader(text: 'URL'),
+                      TextUrl(url: pageUrl, text: 'Click here'),
+                    ],
                   ),
-                  Text(
-                    bedrooms.toString(),
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 20,
-                      color: themeProvider.currentTheme.primaryColor,
-                    ),
-                  )
-                ],
-              ),
-              const VerticalDivider(
-                color: Colors.black,
-                thickness: 2,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'Baths',
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 16,
-                      color: themeProvider.currentTheme.darkGreen,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      DetailHeader(text: 'Area'),
+                      DetailText(text: area)
+                    ],
                   ),
-                  Text(
-                    baths.toString(),
-                    style: TextStyle(
-                      fontFamily: 'Itim',
-                      fontSize: 20,
-                      color: themeProvider.currentTheme.primaryColor,
-                    ),
+                ),
+                const VerticalDivider(
+                  color: Colors.black,
+                  thickness: 2,
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      DetailHeader(text: 'Bedrooms'),
+                      DetailText(text: bedrooms)
+                    ],
                   ),
-                ],
-              ),
-            ],
-          ),
-          ListOfCards(
-            headerText: '  ➡️  Nearest to your location',
-            widthRatio: 2.5,
-            height: 225,
-          ),
-          ListOfCards(
-            headerText: '  ➡️  Recommended for you',
-            widthRatio: 2.5,
-            height: 225,
-          )
-        ],
+                ),
+                const VerticalDivider(
+                  color: Colors.black,
+                  thickness: 2,
+                ),
+                Expanded(
+                  child: Column(
+                    children: [
+                      DetailHeader(text: 'Baths'),
+                      DetailText(text: baths)
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            ListOfCards(
+              headerText: '  ➡️  Nearest to your location',
+              widthRatio: 2.5,
+              height: 225,
+            ),
+            ListOfCards(
+              headerText: '  ➡️  Recommended for you',
+              widthRatio: 2.5,
+              height: 225,
+            )
+          ],
+        ),
       ),
     );
   }

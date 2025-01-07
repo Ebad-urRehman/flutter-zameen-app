@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
 import 'package:zameen_flutter/constants/app_colors.dart';
+import 'package:zameen_flutter/constants/custom_widgets.dart';
 import 'package:zameen_flutter/files/detail%20view/details_screen.dart';
+import 'package:zameen_flutter/files/favourites/favourites.dart';
 import 'package:zameen_flutter/theme_widget.dart';
 
 AppImages appImages = AppImages();
@@ -25,6 +27,8 @@ class EstateCard extends StatelessWidget {
   String agency;
   String agent;
   String price;
+  List record;
+  String isFavourite;
 
   EstateCard(
       {super.key,
@@ -43,7 +47,9 @@ class EstateCard extends StatelessWidget {
       required this.baths,
       required this.agency,
       required this.agent,
-      required this.price});
+      required this.price,
+      required this.record,
+      required this.isFavourite});
 
   @override
   Widget build(BuildContext context) {
@@ -72,56 +78,47 @@ class EstateCard extends StatelessWidget {
                   price: price)),
         )
       },
-      child: Container(
-          width: MediaQuery.of(context).size.width / widthRatio,
-          height: height,
-          child: Card(
-            color: themeProvider.currentTheme.darkGreen,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
+      child: Center(
+        child: Stack(
+          children: [
+            Container(
+                width: MediaQuery.of(context).size.width / widthRatio,
+                height: height,
+                child: Card(
+                  color: themeProvider.currentTheme.darkGreen,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: [
+                        CardHeader(
+                          text: '$propertyName $purpose',
+                        ),
+                        SizedBox(
+                          width: MediaQuery.sizeOf(context).width,
+                          child: Image.asset(
+                              'assets/${propertyName.replaceAll(' ', '_').toLowerCase()}.png'),
+                        ),
+                        CardTexts(
+                            area: area,
+                            city: city,
+                            location: location,
+                            price: price)
+                      ],
+                    ),
+                  ),
+                )),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Row(
                 children: [
-                  Text(
-                    '$propertyName $purpose',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: appColors.white,
-                        fontFamily: 'Itim',
-                        fontSize: 20),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.sizeOf(context).width,
-                    child: Image.asset(
-                        '${propertyName.replaceAll(' ', '_').toLowerCase()}.png'),
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        'Area : $area',
-                        style: TextStyle(
-                            color: appColors.white, fontFamily: 'Itim'),
-                      ),
-                      Text(
-                        'Province : $province',
-                        style: TextStyle(
-                            color: appColors.white, fontFamily: 'Itim'),
-                      ),
-                      Text(
-                        'City : $city',
-                        style: TextStyle(
-                            color: appColors.white, fontFamily: 'Itim'),
-                      ),
-                      Text(
-                        'Location : $location',
-                        style: TextStyle(
-                            color: appColors.white, fontFamily: 'Itim'),
-                      )
-                    ],
-                  )
+                  FavouritesIcon(iconStatus: isFavourite, record: record),
                 ],
               ),
-            ),
-          )),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

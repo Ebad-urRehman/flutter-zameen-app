@@ -2,14 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:zameen_flutter/files/admin/add_data.dart';
+import 'package:zameen_flutter/constants/custom_widgets.dart';
 import 'package:zameen_flutter/files/auth/authentication.dart';
 import 'package:zameen_flutter/files/cards/list_of_cards.dart';
-import 'package:zameen_flutter/files/detail%20view/details_screen.dart';
-import 'package:zameen_flutter/files/fire_store_db/file_store_service.dart';
 import 'package:zameen_flutter/files/home/home_widgets.dart';
 import 'package:zameen_flutter/constants/app_images.dart';
-import 'package:zameen_flutter/files/search/search.dart';
 import 'package:zameen_flutter/files/search/simple_query_result.dart';
 import 'package:zameen_flutter/theme_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,81 +24,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final User? user = Authentication().currentUser;
 
-  Future<void> signOut() async {
-    await Authentication().signOut();
-  }
-
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeManager>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Zameen',
-          style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Itim',
-              fontSize: 24,
-              fontWeight: FontWeight.bold),
-        ),
+        title: AppBarText(text: 'Zameen'),
         backgroundColor: themeProvider.currentTheme.primaryColor,
-        actions: [
-          // CircleAvatar(radius: 20, child: ThemeWidget()),
-          PopupMenuButton<String>(
-            itemBuilder: (BuildContext context) {
-              return [
-                const PopupMenuItem(
-                    value: 'EstateBrowser',
-                    child: Row(children: [
-                      Icon(Icons.location_searching_outlined),
-                      Text('  Browse Estates')
-                    ])),
-                PopupMenuItem(
-                    value: 'Price Predictor',
-                    onTap: () =>
-                        {Navigator.pushNamed(context, 'pricepredictor')},
-                    child: const Row(children: [
-                      Icon(Icons.auto_graph_outlined),
-                      Text('  Predict Prices')
-                    ])),
-                PopupMenuItem(
-                    value: 'Search',
-                    onTap: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SearchFilterExample()))
-                        },
-                    child: const Row(children: [
-                      Icon(Icons.search),
-                      Text('  Search Estates')
-                    ])),
-                PopupMenuItem(
-                    value: 'theme',
-                    onTap: () => {themeProvider.toggleTheme()},
-                    child: ThemeWidget()),
-                PopupMenuItem(
-                    value: 'theme', child: Text(getUserName().toString())),
-                PopupMenuItem(
-                    value: 'Add data',
-                    onTap: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const AddData()))
-                        },
-                    child: const Row(
-                        children: [Icon(Icons.add), Text('  Add Data')])),
-                PopupMenuItem(
-                    value: 'Logout',
-                    onTap: () => {signOut()},
-                    child: const Row(
-                        children: [Icon(Icons.logout), Text('  Logout')]))
-              ];
-            },
-            iconColor: Colors.white,
-          ),
-        ],
+        actions: [DropDownCustomButton()],
       ),
       backgroundColor: themeProvider.currentTheme.secondaryColor,
       body: SafeArea(
@@ -135,8 +65,7 @@ class _HomePageState extends State<HomePage> {
                     return GestureDetector(
                         onTap: () {
                           Map queryParams = {
-                            'column': 'property_type',
-                            'values': [property_name]
+                            'property_type': [property_name]
                           };
                           Navigator.push(
                               context,
@@ -174,8 +103,7 @@ class _HomePageState extends State<HomePage> {
                     child: GestureDetector(
                       onTap: () {
                         Map queryParams = {
-                          'column': 'purpose',
-                          'values': ['For Rent']
+                          'purpose': ['For Rent']
                         };
                         Navigator.push(
                             context,
@@ -187,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                         elevation: 5,
                         color: Colors.transparent,
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width / 2.25,
+                          width: MediaQuery.of(context).size.width / 2.4,
                           height: 100,
                           child: const Text('For rent',
                               style: TextStyle(
@@ -211,8 +139,7 @@ class _HomePageState extends State<HomePage> {
                     child: GestureDetector(
                       onTap: () {
                         Map queryParams = {
-                          'column': 'purpose',
-                          'values': ['For Sale']
+                          'purpose': ['For Sale']
                         };
                         Navigator.push(
                             context,
@@ -224,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                         elevation: 5,
                         color: Colors.transparent,
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width / 2.25,
+                          width: MediaQuery.of(context).size.width / 2.4,
                           height: 100,
                           child: const Text(
                             'For Sale',
@@ -281,7 +208,7 @@ Widget buildImage(context, List urlImage, int index) {
           child: Image.asset(
         urlImage[0],
         fit: BoxFit.fitWidth,
-        color: Colors.black.withOpacity(0.3), // Dimmed overlay effect
+        color: Colors.black, // Dimmed overlay effect
         colorBlendMode: BlendMode.darken,
       )),
       Center(

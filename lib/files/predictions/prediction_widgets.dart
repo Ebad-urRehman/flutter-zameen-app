@@ -55,7 +55,7 @@ class _PredictionUiState extends State<PredictionUi> {
       future: uniqueValues,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
@@ -229,25 +229,26 @@ class SelectBoxState extends State<SelectBox> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Expanded(
-          child: Center(
-        child: DropdownButton(
-          hint: Center(child: Text('Select ${widget.columnName}')),
-          value: selectedValue,
-          onChanged: (newValue) {
-            if (newValue != null) {
-              setState(() {
-                selectedValue = newValue
-                    .toString(); // Initialize `selectedValue` in `initState`
-              });
-              widget.onValueChanged(selectedValue);
-            }
-          },
-          items: widget.optionList.map((valueItem) {
-            return DropdownMenuItem(value: valueItem, child: Text(valueItem));
-          }).toList(),
+      child: Center(
+        child: Expanded(
+          child: DropdownButton(
+            hint: Center(child: Text('Select ${widget.columnName}')),
+            value: selectedValue,
+            onChanged: (newValue) {
+              if (newValue != null) {
+                setState(() {
+                  selectedValue = newValue
+                      .toString(); // Initialize `selectedValue` in `initState`
+                });
+                widget.onValueChanged(selectedValue);
+              }
+            },
+            items: widget.optionList.map((valueItem) {
+              return DropdownMenuItem(value: valueItem, child: Text(valueItem));
+            }).toList(),
+          ),
         ),
-      )),
+      ),
     );
   }
 }

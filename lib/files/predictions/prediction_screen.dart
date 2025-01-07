@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:zameen_flutter/constants/custom_widgets.dart';
 import 'package:zameen_flutter/files/predictions/prediction_widgets.dart';
 import 'package:zameen_flutter/theme_widget.dart';
 
@@ -16,11 +17,8 @@ class PricePredictorPage extends StatelessWidget {
       title: 'Flutter Demo',
       home: Scaffold(
           appBar: AppBar(
-            backgroundColor: themeProvider.currentTheme.primaryColor,
-            title: const Text('Predict house prices',
-                style: TextStyle(
-                    color: Colors.white, fontFamily: 'Itim', fontSize: 24)),
-          ),
+              backgroundColor: themeProvider.currentTheme.primaryColor,
+              title: AppBarText(text: 'Price Predictor')),
           backgroundColor: themeProvider.currentTheme.secondaryColor,
           body: const PredictionUi()),
     );
